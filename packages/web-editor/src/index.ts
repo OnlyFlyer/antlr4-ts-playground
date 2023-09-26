@@ -1,21 +1,20 @@
-import { editor } from 'monaco-editor-core';
-import './flinkEditor'
+import { editor } from "monaco-editor";
 
-(window as any).MonacoEnvironment = {
-	getWorkerUrl: function (_moduleId, label) {
-		switch (label) {
-			case 'flink': {
-				return './flink.worker.js';
-			}
-			default: {
-				return './editor.worker.js';
-			}
-		}
-	}
-};
+// import './chore/flinkContribution'
 
-const container = document.getElementById('container');
+import './chore/monacoEnv';
+import './myLang/register'
+import './myLang/languageConf'
+import './myLang/theme'
+import './myLang/autoCompletion'
+// import { setMark } from './myLang/setMark'
 
-editor.create(container, {
-    language: 'flink'
-})
+
+const container = document.getElementById("container");
+
+const editorIns = editor.create(container, {
+  language: "myLang",
+  theme: "myTheme",
+});
+
+// setMark(editorIns.getModel())
